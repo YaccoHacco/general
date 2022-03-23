@@ -16,6 +16,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@windicss/animations": "^1.0.8",
     "moment": "^2.29.1"
   }
 }

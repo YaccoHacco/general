@@ -34,7 +34,7 @@
 	<div class="flex w-full">
 		<form class="w-full" on:submit|preventDefault={onSubmit}>
 			<div class="flex bg-dark-50 rounded w-full p-1">
-				<input type='text' name='message' bind:this={inputField} bind:value={inputValue} class="border-none bg-transparent ring-0 w-full" />
+				<input type='text' name='message' bind:this={inputField} bind:value={inputValue} class="border-none bg-transparent ring-0 w-full text-white p-2 ring-0 active:ring-0" />
 				<input type='submit' value='Send' class="hidden" />
 			</div>
 		</form>

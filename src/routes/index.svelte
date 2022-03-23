@@ -4,7 +4,7 @@
 	import RightPanel from '../components/RightPanel.svelte'
 </script>
 
-<div class="flex h-full w-full text-gray-300">
+<div class="font-sans text-sm flex h-full w-full text-gray-300">
 	<LeftPanel />
 	<CenterPanel />
 	<RightPanel />
