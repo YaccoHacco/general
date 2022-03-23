@@ -14,5 +14,8 @@
     "svelte": "^3.44.0",
     "svelte-windicss-preprocess": "^4.2.6"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
 }

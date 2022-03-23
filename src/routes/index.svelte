@@ -1,1 +1,11 @@
-<div>This is index.svelte available at localhost:3000<br>Try visitng localhost:3000/home</div>
+<script>
+	import LeftPanel from '../components/LeftPanel.svelte'
+	import CenterPanel from '../components/CenterPanel.svelte'
+	import RightPanel from '../components/RightPanel.svelte'
+</script>
+
+<div class="flex h-full w-full text-gray-300">
+	<LeftPanel />
+	<CenterPanel />
+	<RightPanel />
+</div>
