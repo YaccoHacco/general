@@ -1,19 +1,38 @@
 <script>
 
+    //Create App Connection
+    import firebaseConfig from "../env";
+    import { initializeApp } from 'firebase/app';
+    import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+
+    const app = initializeApp(firebaseConfig);
+    const DB = getFirestore(app);
+    
+    //Auth
+    import { getAuth } from 'firebase/auth';
+
+    const auth = getAuth(app);
+    
+
+    if(auth.currentUser != null){
+        console.log(auth.currentUser)
+    }
+
+
     let linkBar = [
         ["Home","/"],
         ["Create","/create"],
         ["Edit","/edit"],
         ["Upload","/upload"],
         ["About","/about"],
+        ["Account","/account"],
     ];
 
     let loggedIn = false;
 
-    function attempLogin(a,b){
-        console.log("Login: "+a+", "+b)
-        loggedIn=true;
-    }
+
+
+
 
 </script>
 
@@ -38,17 +57,18 @@
         </div>
         <!-- Login Button || Account Button -->
         <div class="w-10 min-w-10 justify-end sm:(w-35 min-w-35)">
-            {#if loggedIn}
-                <div>HFLHJDHSJ</div>
+            {#if auth.currentUser != null}
+                <!--<div>{auth.currentUser.displayName}</div>-->
+                <a href="/account">{auth.currentUser.email}</a>
             {:else}
-                <div on:click={attempLogin}>Login</div>
+                <a href="/account/login">Login</a>
             {/if}
         </div>
     </div>
 
 
     <!-- Page Content -->
-    <slot></slot>
+    <slot ></slot>
     
 </div>
 

@@ -5,6 +5,16 @@
 
     let attm = 0;
 
+    //Create App Connection
+    import firebaseConfig from "../../env";
+    import { initializeApp } from 'firebase/app';
+    const app = initializeApp(firebaseConfig);
+
+    //Auth
+    import { getAuth } from "firebase/auth";
+    import { accountEmailSignIn } from "../../account";
+    const auth = getAuth(app);
+
 
     function formSubmit(){
         if(attm > 5){return;}
@@ -13,9 +23,8 @@
         //Email validation
         if(eml.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
             
-            /* Login Test Here */
-            if(false){
-                /* Login Account Here */
+            //Attempt Login
+            if(accountEmailSignIn(auth, eml.value, pass.value)){
                 eml.value = "";
             }
             else{state = 2;}
@@ -91,10 +100,10 @@
         </form>
     </div>
     <!-- Bad Input -->
-    <div class="transition-all duration-1000 relative top-5px bg-red-600 w-full max-w-90 rounded-b-xl h-0 hover:(h-7) overflow-hidden" bind:this={BadInputArea}>
+    <div class="transition-all duration-1000 relative top-5px bg-red-600 w-full max-w-90 rounded-b-xl overflow-hidden" style="height:0px;" bind:this={BadInputArea}>
         <div class="w-full text-center text-lg underline">Uhh oh</div>
         <div bind:this={BadInputType}></div>
-        <div bind:this={BadInput}>Hmm</div>
+        <div bind:this={BadInput}></div>
         {#if attm > 5}
             You can recover your password <a class="underline" href="/recover">here</a>
         {/if}
