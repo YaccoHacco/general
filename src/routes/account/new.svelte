@@ -1,6 +1,7 @@
 
 <script>
-
+    import { onMount } from "svelte";
+    
     let BadInputType, BadInputArea, BadInput, eml, pass, confpass;
 
     //Create App Connection
@@ -45,8 +46,14 @@
 
     }
 
-
-
+    let isVerified = false;
+    onMount(()=>{
+        if(auth.currentUser == null){
+            isVerified=true;
+            return;
+        }
+        location.href="/account";
+    });
 </script>
 
 
@@ -63,33 +70,34 @@
 
 </style>
 
-
-<div class="flex flex-col w-full h-full items-center">
-    <div class="transition-all m-1 sm:m-5 md:m-20 lg:m-25"></div>
-    <!-- Create Zone -->
-    <div class="transition-all flex flex-col gap-2 bg-dark-100 p-4 rounded-xl w-full max-w-100">
-        <div class="w-full text-center text-lg">Create</div>
-        <form class="flex flex-col gap-2">
-            <div class="formRow">
-                <input placeholder="Email" type="email" bind:this={eml}/>
-            </div>
-            <div class="formRow">
-                <input minlength="6" placeholder="Password" type="password" bind:this={pass}/>
-            </div>
-            <div class="formRow">
-                <input minlength="6" placeholder="Password" type="password" bind:this={confpass}/>
-            </div>
-            <div class="flex flex-row justify-center">
-                <div class="transition-all bg-dark-50 w-30 rounded-sm hover:(rounded-md bg-true-gray-400 cursor-pointer)">
-                    <div class="text-center" on:click={formSubmit}>Submit</div>
+{#if isVerified}
+    <div class="flex flex-col w-full h-full items-center">
+        <div class="transition-all m-1 sm:m-5 md:m-20 lg:m-25"></div>
+        <!-- Create Zone -->
+        <div class="transition-all flex flex-col gap-2 bg-dark-100 p-4 rounded-xl w-full max-w-100">
+            <div class="w-full text-center text-lg">Create</div>
+            <form class="flex flex-col gap-2">
+                <div class="formRow">
+                    <input placeholder="Email" type="email" bind:this={eml}/>
                 </div>
-            </div>
-        </form>
+                <div class="formRow">
+                    <input minlength="6" placeholder="Password" type="password" bind:this={pass}/>
+                </div>
+                <div class="formRow">
+                    <input minlength="6" placeholder="Password" type="password" bind:this={confpass}/>
+                </div>
+                <div class="flex flex-row justify-center">
+                    <div class="transition-all bg-dark-50 w-30 rounded-sm hover:(rounded-md bg-true-gray-400 cursor-pointer)">
+                        <div class="text-center" on:click={formSubmit}>Submit</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Bad Input -->
+        <div class="transition-all duration-1000 relative top-5px bg-red-600 w-full max-w-90 rounded-b-xl h-0 hover:(h-7) overflow-hidden" bind:this={BadInputArea}>
+            <div class="w-full text-center text-lg underline">Uhh oh</div>
+            <div bind:this={BadInputType}></div>
+            <div bind:this={BadInput}>Hmm</div>
+        </div>
     </div>
-    <!-- Bad Input -->
-    <div class="transition-all duration-1000 relative top-5px bg-red-600 w-full max-w-90 rounded-b-xl h-0 hover:(h-7) overflow-hidden" bind:this={BadInputArea}>
-        <div class="w-full text-center text-lg underline">Uhh oh</div>
-        <div bind:this={BadInputType}></div>
-        <div bind:this={BadInput}>Hmm</div>
-    </div>
-</div>
+{/if}

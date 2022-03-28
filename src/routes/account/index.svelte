@@ -1,5 +1,6 @@
 
 <script>
+    import { onMount } from "svelte";
 
     //Create App Connection
     import firebaseConfig from "../../env";
@@ -9,7 +10,6 @@
     //Auth
     import { getAuth } from "firebase/auth";
     import { accountSignOut } from "../../account";
-    import { onMount } from "svelte";
     const auth = getAuth(app);
 
     function attemptLogout(){

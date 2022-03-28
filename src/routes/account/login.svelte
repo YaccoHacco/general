@@ -1,5 +1,6 @@
 
 <script>
+    import { onMount } from "svelte";
 
     let LoginZone, BadInputType, BadInputArea, BadInput, eml, pass;
 
@@ -15,24 +16,21 @@
     import { accountEmailSignIn } from "../../account";
     const auth = getAuth(app);
 
-
     function formSubmit(){
         if(attm > 5){return;}
-        var state = 0;
+        var state = "";
 
-        //Email validation
-        if(eml.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
-            
-            //Attempt Login
-            if(accountEmailSignIn(auth, eml.value, pass.value)){
-                eml.value = "";
-            }
-            else{state = 2;}
+        //Login validation
+        if(!eml.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
+            state = "Invalid Email";
         }
-        else{state = 1;}
+        else if(accountEmailSignIn(auth, eml.value, pass.value)){
+            eml.value = "";
+        }
+        else {state = "Invalid Email or Password";}
         
         //Bad Input
-        if(state != 0){
+        if(state != ""){
             attm++;
             if(attm > 5){
                 LoginZone.style.display = "none";
@@ -50,19 +48,21 @@
                 BadInputArea.style.padding = "4px 16px 16px 16px";
 
                 BadInputType.textContent = "Some of the data entered is incorrect";
-                if(state == 1){
-                    BadInput.textContent = "Invalid email";
-                }
-                else{
-                    BadInput.textContent = "Invalid email or password";
-                }
+                BadInput.textContent = state;
             }
         }
         pass.value = "";
     }
 
 
-
+    let isVerified = false;
+    onMount(()=>{
+        if(auth.currentUser == null){
+            isVerified=true;
+            return;
+        }
+        location.href="/account";
+    });
 </script>
 
 
@@ -79,33 +79,34 @@
 
 </style>
 
-
-<div class="flex flex-col w-full h-full items-center">
-    <div class="transition-all m-1 sm:m-5 md:m-20 lg:m-25"></div>
-    <!-- Login Zone -->
-    <div class="transition-all flex flex-col gap-2 bg-dark-100 p-4 rounded-xl w-full max-w-100" bind:this={LoginZone}>
-        <div class="w-full text-center text-lg">Login</div>
-        <form class="flex flex-col gap-2">
-            <div class="formRow">
-                <input placeholder="Email" type="email" bind:this={eml}/>
-            </div>
-            <div class="formRow">
-                <input minlength="6" placeholder="Password" type="password" bind:this={pass}/>
-            </div>
-            <div class="flex flex-row justify-center">
-                <div class="transition-all bg-dark-50 w-30 rounded-sm hover:(rounded-md bg-true-gray-400 cursor-pointer)">
-                    <div class="text-center" on:click={formSubmit}>Submit</div>
+{#if isVerified}
+    <div class="flex flex-col w-full h-full items-center">
+        <div class="transition-all m-1 sm:m-5 md:m-20 lg:m-25"></div>
+        <!-- Login Zone -->
+        <div class="transition-all flex flex-col gap-2 bg-dark-100 p-4 rounded-xl w-full max-w-100" bind:this={LoginZone}>
+            <div class="w-full text-center text-lg">Login</div>
+            <form class="flex flex-col gap-2">
+                <div class="formRow">
+                    <input placeholder="Email" type="email" bind:this={eml}/>
                 </div>
-            </div>
-        </form>
+                <div class="formRow">
+                    <input minlength="6" placeholder="Password" type="password" bind:this={pass}/>
+                </div>
+                <div class="flex flex-row justify-center">
+                    <div class="transition-all bg-dark-50 w-30 rounded-sm hover:(rounded-md bg-true-gray-400 cursor-pointer)">
+                        <div class="text-center" on:click={formSubmit}>Submit</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Bad Input -->
+        <div class="transition-all duration-1000 relative top-5px bg-red-600 w-full max-w-90 rounded-b-xl overflow-hidden" style="height:0px;" bind:this={BadInputArea}>
+            <div class="w-full text-center text-lg underline">Uhh oh</div>
+            <div bind:this={BadInputType}></div>
+            <div bind:this={BadInput}></div>
+            {#if attm > 5}
+                You can recover your password <a class="underline" href="/recover">here</a>
+            {/if}
+        </div>
     </div>
-    <!-- Bad Input -->
-    <div class="transition-all duration-1000 relative top-5px bg-red-600 w-full max-w-90 rounded-b-xl overflow-hidden" style="height:0px;" bind:this={BadInputArea}>
-        <div class="w-full text-center text-lg underline">Uhh oh</div>
-        <div bind:this={BadInputType}></div>
-        <div bind:this={BadInput}></div>
-        {#if attm > 5}
-            You can recover your password <a class="underline" href="/recover">here</a>
-        {/if}
-    </div>
-</div>
+{/if}
