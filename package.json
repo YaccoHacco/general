@@ -14,5 +14,10 @@
     "svelte": "^3.44.0",
     "svelte-windicss-preprocess": "^4.2.6"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "firebase": "^9.6.10",
+    "rxfire": "^6.0.3",
+    "rxjs": "^7.5.5"
+  }
 }
