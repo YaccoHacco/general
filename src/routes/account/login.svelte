@@ -1,40 +1,47 @@
 
-<script>
+<script lang="ts">
     import { onMount } from "svelte";
+    import { goto } from "$app/navigation";
+    import LoadDots from "../../C/LoadDots.svelte";
+    import ActionButton from "../../C/ActionButton.svelte";
 
     let LoginZone, BadInputType, BadInputArea, BadInput, eml, pass;
-
     let attm = 0;
 
-    //Create App Connection
-    import firebaseConfig from "../../env";
-    import { initializeApp } from 'firebase/app';
-    const app = initializeApp(firebaseConfig);
-
     //Auth
-    import { getAuth } from "firebase/auth";
-    import { accountEmailSignIn } from "../../account";
+    import { app } from "../../F/fb";
+    import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
+    import { accountEmailSignIn, accountGoogleSignIn } from "../../F/account";
     const auth = getAuth(app);
-
-    function formSubmit(){
+    setPersistence(auth, browserLocalPersistence);
+    onAuthStateChanged(auth, (user) => {
+        if(user != null){
+            goto("/account")
+        }
+    });
+    
+    async function formSubmit(){
         if(attm > 5){return;}
         var state = "";
 
         //Login validation
-        if(!eml.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
-            state = "Invalid Email";
-        }
-        else if(accountEmailSignIn(auth, eml.value, pass.value)){
-            eml.value = "";
-        }
+        if(!eml.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){state = "Invalid Email";}
+        else if(pass.value.length<6){state = "Invalid Email or Password";}
+        else if(await accountEmailSignIn(auth, eml.value, pass.value)){eml.value = "";}
         else {state = "Invalid Email or Password";}
         
         //Bad Input
         if(state != ""){
             attm++;
             if(attm > 5){
-                LoginZone.style.display = "none";
+                //Remove and Disable email login box
+                eml.value = "";
+                eml.readOnly = true;
+                pass.value="";
+                pass.readOnly = true;
 
+                LoginZone.style.display = "none";
+                
                 BadInputArea.style.top = "0px";
                 BadInputArea.style.padding = "16px 16px 16px 16px";
                 BadInputArea.style.borderRadius = "12px";
@@ -43,6 +50,7 @@
                 BadInput.innerHTML = "";
             }
             else{
+                //Display Bad input warning
                 BadInputArea.style.display = "block";
                 BadInputArea.style.height = "100%";
                 BadInputArea.style.padding = "4px 16px 16px 16px";
@@ -54,15 +62,29 @@
         pass.value = "";
     }
 
+    
+    async function googleLogin(){
+        if(!(await accountGoogleSignIn(auth))){
+            BadInputArea.style.display = "block";
+            BadInputArea.style.height = "100%";
+            BadInputArea.style.padding = "4px 16px 16px 16px";
+
+            BadInputType.textContent = "Some of the data entered is incorrect";
+            BadInput.textContent = "Error with Google sign in";
+        }
+    }
+
 
     let isVerified = false;
     onMount(()=>{
-        if(auth.currentUser == null){
-            isVerified=true;
+        //Must not be logged in otherwise go to account
+        if(auth.currentUser != null){
+            goto("/account");
             return;
         }
-        location.href="/account";
+        isVerified=true;
     });
+
 </script>
 
 
@@ -92,10 +114,9 @@
                 <div class="formRow">
                     <input minlength="6" placeholder="Password" type="password" bind:this={pass}/>
                 </div>
-                <div class="flex flex-row justify-center">
-                    <div class="transition-all bg-dark-50 w-30 rounded-sm hover:(rounded-md bg-true-gray-400 cursor-pointer)">
-                        <div class="text-center" on:click={formSubmit}>Submit</div>
-                    </div>
+                <div class="flex flex-row justify-center gap-1">
+                    <ActionButton f={formSubmit}>Submit</ActionButton>
+                    <ActionButton f={googleLogin}>Google</ActionButton>
                 </div>
             </form>
         </div>
@@ -105,8 +126,10 @@
             <div bind:this={BadInputType}></div>
             <div bind:this={BadInput}></div>
             {#if attm > 5}
-                You can recover your password <a class="underline" href="/recover">here</a>
+                You can recover your password <a class="underline" href="account/recover">here</a>
             {/if}
         </div>
     </div>
+{:else}
+    <LoadDots />
 {/if}

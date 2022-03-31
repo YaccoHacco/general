@@ -12,7 +12,7 @@
     
 
     //Create App Connection
-    import firebaseConfig from "../env";
+    import firebaseConfig from "../F/env";
     import { initializeApp } from 'firebase/app';
     import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 

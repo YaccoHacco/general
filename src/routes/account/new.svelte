@@ -1,21 +1,26 @@
 
 <script>
     import { onMount } from "svelte";
-    
+    import { goto } from "$app/navigation";
+    import LoadDots from "../../C/LoadDots.svelte"
+
     let BadInputType, BadInputArea, BadInput, eml, pass, confpass;
 
     //Create App Connection
-    import firebaseConfig from "../../env";
+    import firebaseConfig from "../../F/env";
     import { initializeApp } from 'firebase/app';
     const app = initializeApp(firebaseConfig);
 
     //Auth
-    import { getAuth } from "firebase/auth";
-    import { accountEmailCreate } from "../../account";
-    const auth = getAuth(app);
+    //import { getAuth } from "firebase/auth";
+    import { accountEmailCreate } from "../../F/account";
+    //const auth = getAuth(app);
+
+    import { createAuth } from "../../F/fb";
+    const auth = createAuth();
 
 
-    function formSubmit(){
+    async function formSubmit(){
         var state = "";
 
         //Email validation
@@ -28,7 +33,7 @@
         else if(pass.value != confpass.value){
             state = "Passwords don't match";
         }
-        else if(accountEmailCreate(auth, eml.value, pass.value)){
+        else if(await accountEmailCreate(auth, eml.value, pass.value)){
             eml.value = "";
         }
         else{state = "Email already in use";}
@@ -48,11 +53,12 @@
 
     let isVerified = false;
     onMount(()=>{
-        if(auth.currentUser == null){
-            isVerified=true;
+        //Must not be logged in otherwise go to account
+        if(auth.currentUser != null){
+            goto("/account");
             return;
         }
-        location.href="/account";
+        isVerified = true;
     });
 </script>
 
@@ -100,4 +106,6 @@
             <div bind:this={BadInput}>Hmm</div>
         </div>
     </div>
+{:else}
+    <LoadDots />
 {/if}

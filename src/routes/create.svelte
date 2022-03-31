@@ -5,7 +5,7 @@
     import Section from "../C/Section.svelte";
     import ObjectList from "../C/ObjectList.svelte";
 
-    import infoData from "../urprlfData.json";
+    import infoData from "../F/urprlfData.json";
     let infoObj = infoData.config;
     
 </script>
