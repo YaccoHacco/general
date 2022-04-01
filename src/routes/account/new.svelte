@@ -6,18 +6,16 @@
 
     let BadInputType, BadInputArea, BadInput, eml, pass, confpass;
 
-    //Create App Connection
-    import firebaseConfig from "../../F/env";
-    import { initializeApp } from 'firebase/app';
-    const app = initializeApp(firebaseConfig);
-
     //Auth
-    //import { getAuth } from "firebase/auth";
+    import { app } from "../../F/fb";
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
     import { accountEmailCreate } from "../../F/account";
-    //const auth = getAuth(app);
-
-    import { createAuth } from "../../F/fb";
-    const auth = createAuth();
+    const auth = getAuth(app);
+    onAuthStateChanged(auth, (user) => {
+        if(user != null){
+            goto("/account")
+        }
+    });
 
 
     async function formSubmit(){

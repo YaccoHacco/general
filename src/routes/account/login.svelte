@@ -10,10 +10,9 @@
 
     //Auth
     import { app } from "../../F/fb";
-    import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
     import { accountEmailSignIn, accountGoogleSignIn } from "../../F/account";
     const auth = getAuth(app);
-    setPersistence(auth, browserLocalPersistence);
     onAuthStateChanged(auth, (user) => {
         if(user != null){
             goto("/account")
@@ -75,6 +74,11 @@
     }
 
 
+    async function newUser(){
+        await goto("/account/new");
+    }
+
+
     let isVerified = false;
     onMount(()=>{
         //Must not be logged in otherwise go to account
@@ -117,6 +121,7 @@
                 <div class="flex flex-row justify-center gap-1">
                     <ActionButton f={formSubmit}>Submit</ActionButton>
                     <ActionButton f={googleLogin}>Google</ActionButton>
+                    <ActionButton f={newUser}>New</ActionButton>
                 </div>
             </form>
         </div>

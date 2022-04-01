@@ -6,10 +6,10 @@
 
     //Auth
     import { app } from "../../F/fb";
-    import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
     import { accountSignOut } from "../../F/account";
     const auth = getAuth(app);
-    setPersistence(auth, browserLocalPersistence);
+    //setPersistence(auth, browserLocalPersistence);
 
     
     async function attemptLogout(){
