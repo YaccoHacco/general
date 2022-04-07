@@ -53,12 +53,6 @@
         
     }
     */
-    async function addUser(){
-        const usersDoc = await setDoc(doc(DB, "/users","abc"),{
-            "auth":false,
-        });
-        
-    }
 
 </script>
 

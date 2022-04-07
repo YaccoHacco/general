@@ -124,4 +124,4 @@ async function accountGoogleSignIn(auth:Auth):Promise<boolean>{
 
 
 
-export { accountSignOut, accountEmailCreate, accountEmailSignIn, accountGoogleSignIn }
+export { accountSignOut, onPossibleNewUser, accountEmailCreate, accountEmailSignIn, accountGoogleSignIn }

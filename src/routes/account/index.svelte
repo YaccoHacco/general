@@ -3,12 +3,17 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import LoadDots from "../../C/LoadDots.svelte";
+    import ProfileRecursive from "../../C/ProfileRecursive.svelte";
 
-    //Auth
-    import { app } from "../../F/fb";
+    //Auth & Firestore
+    import { app, DB, doc, isDoc, getDoc } from "../../F/fb";
     import { getAuth, onAuthStateChanged } from "firebase/auth";
-    import { accountSignOut } from "../../F/account";
+    import { accountSignOut, onPossibleNewUser } from "../../F/account";
     const auth = getAuth(app);
+
+    //Data
+    import urprlfFormat from "../../F/urprlfFormat.json";
+    let urprofile;
 
     
     async function attemptLogout(){
@@ -32,24 +37,30 @@
     }
 
     async function clearData(){
-        //await goto("/account/settings");
+        //await goto("/account/clear");
         //Popup
     }
     
 
     let isVerified = false;
-    onMount(() => {
+    onMount(async () => {
         //Must be logged in otherwise go to login
         if(auth.currentUser == null){
-            goto("/account/login");
+            await goto("/account/login");
             return;
         }
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth,async (user) => {
             if(user == null){
-                goto("/");
+                await goto("/");
             }
         });
         isVerified = true;
+        urprofile = await getDoc(doc(DB, "users", auth.currentUser.uid));
+        if(urprofile.get("address") != null){
+            await onPossibleNewUser(auth.currentUser);
+            urprofile = await getDoc(doc(DB, "users", auth.currentUser.uid));
+        }
+        //console.log(urprofile.get("address"))
     });
 
 </script>
@@ -108,7 +119,9 @@
                 <!-- Reset (with confirm popup), Download, Settings, Privacy,  -->
             </div>
         </div>
-        
+        <div class="flex flex-row justify-center w-full">
+            <ProfileRecursive urprofile={urprofile} format={urprlfFormat}></ProfileRecursive>
+        </div>
     </div>
 {:else}
     <LoadDots />

@@ -28,4 +28,4 @@ async function isDoc(d:DocumentReference<DocumentData>):Promise<boolean> {
 
 
 
-export { app, DB, isDoc }
+export { app, DB, isDoc, collection, doc, getDoc, setDoc }

@@ -1,5 +1,9 @@
 {
-    "config":[
+    "name":"Ur Data",
+    "desc":"All your data",
+    "path":"",
+    "type":"container",
+    "keys":[
         {
             "name":"Name",
             "desc":"Your name",
@@ -13,7 +17,7 @@
                     "type":"string"
                 },
                 {
-                    "name":"Middle Name_Initial",
+                    "name":"Middle Name or Initial",
                     "desc":"You legal middle name or initial",
                     "path":"name_middle",
                     "type":"string"
