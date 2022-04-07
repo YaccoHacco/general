@@ -1,16 +1,24 @@
 
-
 //Auth
 import { updateCurrentUser, signOut, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
-import type { Auth } from 'firebase/auth'
-import { authStore } from "../stores/authStore"
-
-
-//Providers
+import type { Auth, User } from 'firebase/auth'
+import { authStore } from '../stores/authStore'
 const googleProv = new GoogleAuthProvider();
+
+//Firestore
+import { setDoc, doc } from 'firebase/firestore'
+import { isDoc, DB } from "./fb"
+
+//Data
+import emptyData from '../F/emptyData.json'
 
 
 //--Global
+/**
+ * Sign out of account
+ * @param auth Firebase auth
+ * @returns True if account is successfully signed out
+ */
 async function accountSignOut(auth:Auth):Promise<boolean>{
     var status = null;
     await signOut(auth)
@@ -29,8 +37,25 @@ async function accountSignOut(auth:Auth):Promise<boolean>{
     return status;
 }
 
+/**
+ * Creates user data if it does not exist
+ * @param user The possible new user
+ */
+async function onPossibleNewUser(user:User){
+    if(!(await isDoc(doc(DB, "/users", user.uid)))){
+        await setDoc(doc(DB, "/users", user.uid), emptyData);
+    }
+}
+
 
 //--Email
+/**
+ * Create a new FIrebase email account
+ * @param auth Firebase auth
+ * @param email Email for account
+ * @param password Password for account
+ * @returns True if account is successfully created
+ */
 async function accountEmailCreate(auth:Auth, email:string, password:string):Promise<boolean>{
     var status = null;
     await createUserWithEmailAndPassword(auth, email, password)
@@ -39,6 +64,7 @@ async function accountEmailCreate(auth:Auth, email:string, password:string):Prom
         status = true;
         await updateCurrentUser(auth, userCredential.user);
         authStore.set(auth);
+        await onPossibleNewUser(userCredential.user);
     })
     .catch((error) => {
         //Display Error
@@ -49,6 +75,13 @@ async function accountEmailCreate(auth:Auth, email:string, password:string):Prom
     return status; 
 }
 
+/**
+ * Log in to existing Firebase email account
+ * @param auth Firebase auth
+ * @param email Email of account
+ * @param password Password of account
+ * @returns True if account is successfully logged in
+ */
 async function accountEmailSignIn(auth:Auth, email:string, password:string):Promise<boolean>{
     var status = null;
     await signInWithEmailAndPassword(auth, email, password)
@@ -67,6 +100,11 @@ async function accountEmailSignIn(auth:Auth, email:string, password:string):Prom
 
 
 //--Google
+/**
+ * Create or log in to Firebase Google account (opens popup)
+ * @param auth Firebase auth
+ * @returns True if account is succesfully logged in and or created
+ */
 async function accountGoogleSignIn(auth:Auth):Promise<boolean>{
     var status = null;
     await signInWithPopup(auth, googleProv)
@@ -75,6 +113,7 @@ async function accountGoogleSignIn(auth:Auth):Promise<boolean>{
         status = true;
         await updateCurrentUser(auth, userCredential.user);
         authStore.set(auth);
+        await onPossibleNewUser(userCredential.user);
     })
     .catch((error) => {
         //Display Error
@@ -82,5 +121,7 @@ async function accountGoogleSignIn(auth:Auth):Promise<boolean>{
     });
     return status
 }
+
+
 
 export { accountSignOut, accountEmailCreate, accountEmailSignIn, accountGoogleSignIn }

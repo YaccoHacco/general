@@ -12,12 +12,9 @@
     
 
     //Create App Connection
-    import firebaseConfig from "../F/env";
-    import { initializeApp } from 'firebase/app';
+    import { app, DB, isDoc } from "../F/fb";
     import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 
-    const app = initializeApp(firebaseConfig);
-    const DB = getFirestore(app);
     
     //Auth
     import { EmailAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
@@ -31,6 +28,7 @@
     const dataDocRef = doc(DB, "/User/Test");
     async function run(){
         const dataDoc = await getDoc(dataDocRef);
+        console.log(await isDoc(dataDocRef))
         data = dataDoc.get("name");
         //console.log(dataDoc.get("name"));
     }

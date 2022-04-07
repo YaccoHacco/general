@@ -3,31 +3,31 @@
         {
             "name":"Name",
             "desc":"Your name",
-            "path":"/name",
+            "path":"name",
             "type":"container",
             "keys":[
                 {
                     "name":"First Name",
                     "desc":"Your legal first name",
-                    "path":"/name/first",
+                    "path":"name_first",
                     "type":"string"
                 },
                 {
-                    "name":"Middle Name/Initial",
+                    "name":"Middle Name_Initial",
                     "desc":"You legal middle name or initial",
-                    "path":"/name/middle",
+                    "path":"name_middle",
                     "type":"string"
                 },
                 {
                     "name":"Last Name",
                     "desc":"You legal last name",
-                    "path":"/name/last",
+                    "path":"name_last",
                     "type":"string"
                 },
                 {
                     "name":"Preffered Name",
                     "desc":"The name you would preffer to be called",
-                    "path":"/name/name",
+                    "path":"name_name",
                     "type":"string"
                 }
             ]
@@ -35,31 +35,31 @@
         {
             "name":"Contact",
             "desc":"Different ways you can be contacted",
-            "path":"/contact",
+            "path":"contact",
             "type":"container",
             "keys":[
                 {
                     "name":"Email",
                     "desc":"Your primary email",
-                    "path":"/contact/email1",
+                    "path":"contact_email_1",
                     "type":"email"
                 },
                 {
                     "name":"Secondary Email",
                     "desc":"Your secondary email",
-                    "path":"/contact/email2",
+                    "path":"contact_email_2",
                     "type":"email"
                 },
                 {
                     "name":"Phone Number",
                     "desc":"Your personal or mobile phone number",
-                    "path":"/contact/phone1",
+                    "path":"contact_phone_1",
                     "type":"phonenum"
                 },
                 {
                     "name":"Secondary Phone Number",
                     "desc":"Your seconday or landline phone number",
-                    "path":"/contact/phone2",
+                    "path":"contact_phone_2",
                     "type":"phonenum"
                 }
             ]
@@ -67,19 +67,19 @@
         {
             "name":"Address",
             "desc":"Your current residence",
-            "path":"/address",
+            "path":"address",
             "type":"container",
             "keys":[
                 {
                     "name":"Country",
                     "desc":"The country you reside in",
-                    "path":"/address/country",
+                    "path":"address_country",
                     "type":"country"
                 },
                 {
                     "name":"Address",
                     "desc":"Your address",
-                    "path":"/address/address",
+                    "path":"address_address",
                     "type":"address"
                 }
             ]
@@ -87,31 +87,31 @@
         {
             "name":"Profile",
             "desc":"Information about your profile",
-            "path":"/profile",
+            "path":"profile",
             "type":"container",
             "keys":[
                 {
                     "name":"Description",
                     "desc":"A short desciption or bio",
-                    "path":"/profile/desc",
+                    "path":"profile_desc",
                     "type":"string"
                 },
                 {
                     "name":"Long Description",
                     "desc":"A long description or bio",
-                    "path":"/profile/longdesc",
+                    "path":"profile_longdesc",
                     "type":"string-long"
                 },
                 {
                     "name":"Photo",
                     "desc":"A profile photo",
-                    "path":"/profile/photo1",
+                    "path":"profile_photo1",
                     "type":"image"
                 },
                 {
                     "name":"Secondary Photo",
                     "desc":"A secondary profile photo",
-                    "path":"/profile/photo2",
+                    "path":"profile_photo2",
                     "type":"image"
                 }
             ]
@@ -119,45 +119,45 @@
         {
             "name":"School",
             "desc":"Your school and academic career",
-            "path":"/school",
+            "path":"school",
             "type":"container",
             "keys":[
                 {
                     "name":"School",
                     "desc":"List of all schools you are currently enrolled in",
-                    "path":"/school/school",
+                    "path":"school_current",
                     "type":"array",
                     "arraytype":"string"
                 },
                 {
                     "name":"High School",
                     "desc":"Your high school academic career",
-                    "path":"/school/hs",
+                    "path":"school_hs",
                     "type":"container",
                     "keys":[
                         {
                             "name":"Schools",
                             "desc":"List of all high schools you have attended",
-                            "path":"/school/hs/schools",
+                            "path":"school_hs_schools",
                             "type":"array",
                             "arraytype":"string"
                         },
                         {
                             "name":"GPA",
                             "desc":"Your high school GPA",
-                            "path":"/school/hs/gpa",
+                            "path":"school_hs_gpa",
                             "type":"container",
                             "keys":[
                                 {
                                     "name":"Weighted",
                                     "desc":"Your weighted high school GPA",
-                                    "path":"/school/hs/gpa/weighted",
+                                    "path":"school_hs_gpa_weighted",
                                     "type":"number"
                                 },
                                 {
                                     "name":"Unweighted",
                                     "desc":"Your unweighted high school GPA",
-                                    "path":"/school/hs/gpa/unweighted",
+                                    "path":"school_hs_gpa_unweighted",
                                     "type":"number"
                                 }
                             ]
@@ -165,13 +165,13 @@
                         {
                             "name":"Transcript",
                             "desc":"Your highschool transcript",
-                            "path":"/school/hs/transcript",
+                            "path":"school_hs_transcript",
                             "type":"doc"
                         },
                         {
                             "name":"Honors & Awards",
                             "desc":"Highschool honors and awards",
-                            "path":"/school/hs/honors",
+                            "path":"school_hs_honors",
                             "type":"array",
                             "arraytype":"string"
                         }
@@ -180,32 +180,32 @@
                 {
                     "name":"College",
                     "desc":"Your college academic career",
-                    "path":"/school/col",
+                    "path":"school_col",
                     "type":"container",
                     "keys":[
                         {
                             "name":"Schools",
                             "desc":"List of all colleges you have attended",
-                            "path":"/school/col/schools",
+                            "path":"school_col_schools",
                             "type":"array",
                             "arraytype":"string"
                         },
                         {
                             "name":"GPA",
                             "desc":"Your college GPA",
-                            "path":"/school/col/gpa",
+                            "path":"school_col_gpa",
                             "type":"container",
                             "keys":[
                                 {
                                     "name":"Weighted",
                                     "desc":"Your weighted college GPA",
-                                    "path":"/school/col/gpa/weighted",
+                                    "path":"school_col_gpa_weighted",
                                     "type":"number"
                                 },
                                 {
                                     "name":"Unweighted",
                                     "desc":"You unweighted college GPA",
-                                    "path":"/school/col/gpa/unweighted",
+                                    "path":"school_col_gpa_unweighted",
                                     "type":"number"
                                 }
                             ]
@@ -213,7 +213,7 @@
                         {
                             "name":"Transcript",
                             "desc":"Your college transcript",
-                            "path":"/school/col/transcript",
+                            "path":"school_col_transcript",
                             "type":"doc"
                         }
                     ]
@@ -221,19 +221,19 @@
                 {
                     "name":"Testing",
                     "desc":"Testing scores",
-                    "path":"/school/test",
+                    "path":"school_test",
                     "type":"container",
                     "keys":[
                         {
                             "name":"ACT",
                             "desc":"Your ACT super score",
-                            "path":"/school/test/act",
+                            "path":"school_test_act",
                             "type":"act"
                         },
                         {
                             "name":"SAT",
                             "desc":"Your SAT super score",
-                            "path":"/school/test/sat",
+                            "path":"school_test_sat",
                             "type":"sat"
                         }
                     ]
@@ -241,14 +241,14 @@
                 {
                     "name":"Certifications",
                     "desc":"Certifications you have obtained",
-                    "path":"/school/certs",
+                    "path":"school_certs",
                     "type":"array",
                     "arraytype":"string"
                 },
                 {
                     "name":"Degrees",
                     "desc":"Degrees you have obtained",
-                    "path":"/school/degrees",
+                    "path":"school_degrees",
                     "type":"array",
                     "arraytype":"string"
                 }
@@ -257,19 +257,19 @@
         {
             "name":"Jobs",
             "desc":"Your job experience",
-            "path":"/jobs",
+            "path":"jobs",
             "type":"container",
             "keys":[
                 {
                     "name":"Current Job",
                     "desc":"Job you currently hold",
-                    "path":"/jobs/current",
+                    "path":"jobs_current",
                     "type":"job"
                 },
                 {
                     "name":"Jobs",
                     "desc":"Jobs you have held",
-                    "path":"/jobs/previous",
+                    "path":"jobs_previous",
                     "type":"job"
                 }
             ]
@@ -277,19 +277,19 @@
         {
             "name":"Internships",
             "desc":"Your internships",
-            "path":"/internships",
+            "path":"internships",
             "type":"container",
             "keys":[
                 {
                     "name":"Current Internship",
                     "desc":"Internship you are currently in",
-                    "path":"/internships/current",
+                    "path":"internships_current",
                     "type":"internship"
                 },
                 {
                     "name":"Past Internships",
                     "desc":"Internships you have held",
-                    "path":"/internships/previous",
+                    "path":"internships_previous",
                     "type":"array",
                     "arraytype":"internship"
                 }
@@ -298,13 +298,13 @@
         {
             "name":"Community Service",
             "desc":"Your community service experience",
-            "path":"/comserv",
+            "path":"comserv",
             "type":"container",
             "keys":[
                 {
                     "name":"Volunteer Hours",
                     "desc":"Hours you have volunteered",
-                    "path":"/comserv/hours",
+                    "path":"comserv_hours",
                     "type":"number",
                     "min":0,
                     "max":5000
@@ -312,7 +312,7 @@
                 {
                     "name":"Community Service Experiences",
                     "desc":"Community service experiences",
-                    "path":"/comserv/comserv",
+                    "path":"comserv_comserv",
                     "type":"array",
                     "arraytype":"comserv"
                 }
@@ -321,28 +321,78 @@
         {
             "name":"Languages",
             "desc":"Languages you know",
-            "path":"/lang",
+            "path":"lang",
             "type":"container",
             "keys":[
                 {
                     "name":"First Language",
                     "desc":"Your first language",
-                    "path":"/lang/first",
+                    "path":"lang_first",
                     "type":"language"
                 },
                 {
                     "name":"Second Language",
                     "desc":"Your second language",
-                    "path":"/lang/second",
+                    "path":"lang_second",
                     "type":"language"
                 },
                 {
                     "name":"Additional Languages",
                     "desc":"Other languages you know",
-                    "path":"/lang/additional",
+                    "path":"lang_additional",
                     "type":"array",
                     "arraytype":"language",
                     "max":5
+                }
+            ]
+        },
+        {
+            "name":"Accounts",
+            "desc":"Accounts you have",
+            "path":"acc",
+            "type":"container",
+            "keys":[
+                {
+                    "name":"Google",
+                    "desc":"Your Google account",
+                    "path":"acc_google",
+                    "type":"email"
+                },
+                {
+                    "name":"LinkedIn",
+                    "desc":"Your LinkedIn account",
+                    "path":"acc_linkedin",
+                    "type":"linkedinacc"
+                },
+                {
+                    "name":"Facebook",
+                    "desc":"Your Facebook account",
+                    "path":"acc_fb",
+                    "type":"fbacc"
+                },
+                {
+                    "name":"Instagram",
+                    "desc":"Your Instagram account",
+                    "path":"acc_insta",
+                    "type":"instaacc"
+                },
+                {
+                    "name":"Snapchat",
+                    "desc":"Your Snapchat account",
+                    "path":"acc_snap",
+                    "type":"snapacc"
+                },
+                {
+                    "name":"Twitter",
+                    "desc":"Your Twitter account",
+                    "path":"acc_twitter",
+                    "type":"twitteracc"
+                },
+                {
+                    "name":"TikTok",
+                    "desc":"Your TikTok account",
+                    "path":"acc_tiktok",
+                    "type":"tiktokacc"
                 }
             ]
         }

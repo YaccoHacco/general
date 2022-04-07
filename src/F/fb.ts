@@ -5,24 +5,27 @@ import { initializeApp } from "firebase/app";
 const app = initializeApp(firebaseConfig);
 
 //Auth
-import { getAuth, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
-import type { Auth } from "firebase/auth";
-const auth = getAuth(app);
-setPersistence(auth, browserLocalPersistence);
+import type { User } from 'firebase/auth'
+
+//Firestore
+import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import type { CollectionReference, DocumentReference, DocumentData } from 'firebase/firestore'
+const DB = getFirestore(app);
 
 
+//Firestore Functions
 
-async function makeAuth():Promise<Auth>{
-    var auth:Auth = getAuth(app);
-    await setPersistence(auth, browserLocalPersistence);
-    return auth;
+/**
+ * Returns true if the firestore doc exists
+ * @param d a firestore doc()
+ * @returns true if the doc exists and false otherwise
+ */
+async function isDoc(d:DocumentReference<DocumentData>):Promise<boolean> {
+    return (await getDoc(d)).exists();
 }
 
-function createAuth():Auth{
-    var R:Auth;
-    makeAuth().then((r) => {R=r;})
-    return R;
-}
 
 
-export { app, createAuth, makeAuth }
+
+
+export { app, DB, isDoc }

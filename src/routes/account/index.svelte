@@ -3,7 +3,6 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import LoadDots from "../../C/LoadDots.svelte";
-    import AccountButton from "../../C/AccountButton.svelte";
 
     //Auth
     import { app } from "../../F/fb";

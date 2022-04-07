@@ -1,0 +1,74 @@
+{
+    "name":"$name_name",
+    "name_first":"",
+    "name_middle":"",
+    "name_last":"",
+    "name_name":"",
+
+    "contact":null,
+    "contact_email_1":"",
+    "contact_email_2":"",
+    "contact_phone_1":"",
+    "contact_phone_2":"",
+
+    "address":"$address_address",
+    "address_country":{},
+    "address_address":{},
+
+    "profile":null,
+    "profile_desc":"",
+    "profile_longdesc":"",
+    "profile_photo1":{},
+    "profile_photo2":{},
+
+    "school":"$school_current",
+    "school_current":[],
+
+    "school_hs":"$school_hs_schools",
+    "school_hs_schools":[],
+    "school_hs_gpa":"$school_hs_gpa_weighted",
+    "school_hs_gpa_weighted":0,
+    "school_hs_gpa_unweighted":0,
+    "school_hs_transcript":{},
+    "school_hs_honors":[],
+
+    "school_col":"$school_col_schools",
+    "school_col_schools":[],
+    "school_col_gpa":"$school_col_gpa_weighted",
+    "school_col_gpa_weighted":0,
+    "school_col_gpa_unweighted":0,
+    "school_col_transcript":{},
+
+    "school_test":null,
+    "school_test_act":[0,0,0,0,0,0],
+    "school_test_sat":0,
+
+    "school_certs":[],
+    "school_degrees":[],
+
+    "jobs":"$jobs_current",
+    "jobs_current":[],
+    "jobs_previous":[],
+
+    "internships":"$internships_current",
+    "internships_current":[],
+    "internships_previous":[],
+
+    "comserv":"$comserv_hours",
+    "comserv_hours":0,
+    "comserv_comserv":[],
+
+    "lang":"$lang_first",
+    "lang_first":"",
+    "lang_second":"",
+    "lang_additional":[],
+
+    "acc":null,
+    "acc_google":"",
+    "acc_linkedin":"",
+    "acc_fb":"",
+    "acc_insta":"",
+    "acc_snap":"",
+    "acc_twitter":"",
+    "acc_tiktok":""
+}
