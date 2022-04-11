@@ -98,7 +98,7 @@
                     "name":"Description",
                     "desc":"A short desciption or bio",
                     "path":"profile_desc",
-                    "type":"string"
+                    "type":"string-med"
                 },
                 {
                     "name":"Long Description",
@@ -397,6 +397,27 @@
                     "desc":"Your TikTok account",
                     "path":"acc_tiktok",
                     "type":"tiktokacc"
+                }
+            ]
+        },
+        {
+            "name":"Personal",
+            "desc":"Personal Information",
+            "path":"presonal",
+            "type":"container",
+            "private":true,
+            "keys":[
+                {
+                    "name":"Birth Day",
+                    "desc":"The day you were born",
+                    "path":"personal_bday",
+                    "type":"date"
+                },
+                {
+                    "name":"SSN",
+                    "desc":"Your Social Security Number",
+                    "path":"personal_ssn",
+                    "type":"ssn"
                 }
             ]
         }

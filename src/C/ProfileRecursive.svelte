@@ -1,4 +1,7 @@
 <script>
+    import StringInp from "./profile_inputs/StringInp.svelte";
+
+
     export let urprofile = {};
     export let format = {};
     let state = true;
@@ -30,7 +33,7 @@
             </svg>
         </div>
     {/if}
-    <div class="px-1 ml-1 border-l-2 border-black {state?"":"hid"}">
+    <div class="px-1 ml-1 border-l-2 border-black py-1 {state?"":"hid"}">
         {#each format.keys as f}
             {#if f.type == "container"}
                 <svelte:self urprofile={urprofile} format={f}></svelte:self>
@@ -41,7 +44,15 @@
                         <div><svg width="1em" height="1em" viewBox="0 0 24 24"><path fill="#888888" d="M12 15a3 3 0 1 1 0-6a3 3 0 0 1 0 6Z"></path></svg></div>
                         <div class="text-md">{f.desc}</div>
                     </div>
-                    Input
+                    {#if f.type == "string"}
+                        <StringInp dataPath={f.path}></StringInp>
+                    {:else if f.type == "string-med"}
+                        <StringInp dataPath={f.path} maxLen={128}></StringInp>
+                    {:else if f.type == "string-long"}
+                        <StringInp dataPath={f.path} maxLen={1000}></StringInp>
+                    {:else}
+                        <div>Unknown Input type ({f.type})</div>
+                    {/if}
                 </div>
             {/if}
         {/each}
