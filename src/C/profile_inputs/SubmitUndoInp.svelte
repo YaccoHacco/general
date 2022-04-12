@@ -1,9 +1,12 @@
 <script>
     export let onSubmit;
     export let onUndo;
+    export let isChanged = false;
+    export let isError = false;
 </script>
 
 <div class="flex flex-row gap-1">
+    {#if isChanged}
     <button class="p-1 rounded-lg bg-green-500 hover:bg-green-600 focus:bg-green-700" on:click={onSubmit}>
         <div class="flex flex-row gap-1 justify-center items-center">
             <svg class="h-5" viewBox="0 0 24 24"><path fill="#000000" d="M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z"></path></svg>
@@ -16,4 +19,10 @@
             <div>Undo</div>
         </div>
     </button>
+    {/if}
+    {#if isError}
+        <div class="flex flex-row justify-center items-center p-1 rounded-lg bg-orange-500 hover:bg-orange-600" title="An error occured">
+            <svg class="h-5" viewBox="0 0 24 24"><path fill="#000000" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+        </div>
+    {/if}
 </div>

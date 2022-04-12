@@ -120,7 +120,7 @@
             </div>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <ProfileRecursive urprofile={urprofile} format={urprlfFormat}></ProfileRecursive>
+            <ProfileRecursive auth={auth} urprofile={urprofile} format={urprlfFormat}></ProfileRecursive>
         </div>
     </div>
 {:else}

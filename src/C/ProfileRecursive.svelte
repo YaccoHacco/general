@@ -1,7 +1,8 @@
 <script>
     import StringInp from "./profile_inputs/StringInp.svelte";
+    import EmailInp from "./profile_inputs/EmailInp.svelte";
 
-
+    export let auth;
     export let urprofile = {};
     export let format = {};
     let state = true;
@@ -36,7 +37,7 @@
     <div class="px-1 ml-1 border-l-2 border-black py-1 {state?"":"hid"}">
         {#each format.keys as f}
             {#if f.type == "container"}
-                <svelte:self urprofile={urprofile} format={f}></svelte:self>
+                <svelte:self auth={auth} urprofile={urprofile} format={f}></svelte:self>
             {:else}
                 <div>
                     <div class="flex flex-row gap-1 items-center">
@@ -45,11 +46,13 @@
                         <div class="text-md">{f.desc}</div>
                     </div>
                     {#if f.type == "string"}
-                        <StringInp dataPath={f.path}></StringInp>
+                        <StringInp auth={auth} dataPath={f.path}/>
                     {:else if f.type == "string-med"}
-                        <StringInp dataPath={f.path} maxLen={128}></StringInp>
+                        <StringInp auth={auth} dataPath={f.path} maxLen={128}/>
                     {:else if f.type == "string-long"}
-                        <StringInp dataPath={f.path} maxLen={1000}></StringInp>
+                        <StringInp auth={auth} dataPath={f.path} maxLen={1000}/>
+                    {:else if f.type == "email"}
+                        <EmailInp auth={auth} dataPath={f.path}/>
                     {:else}
                         <div>Unknown Input type ({f.type})</div>
                     {/if}

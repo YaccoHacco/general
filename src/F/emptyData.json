@@ -12,8 +12,8 @@
     "contact_phone_2":"",
 
     "address":"$address_address",
-    "address_country":{},
-    "address_address":{},
+    "address_country":"",
+    "address_address":"",
 
     "profile":null,
     "profile_desc":"",
