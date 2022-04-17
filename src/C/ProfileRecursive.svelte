@@ -1,6 +1,7 @@
 <script>
     import StringInp from "./profile_inputs/StringInp.svelte";
     import EmailInp from "./profile_inputs/EmailInp.svelte";
+    import PhoneInp from "./profile_inputs/PhoneInp.svelte"
 
     export let auth;
     export let urprofile = {};
@@ -53,6 +54,8 @@
                         <StringInp auth={auth} dataPath={f.path} maxLen={1000}/>
                     {:else if f.type == "email"}
                         <EmailInp auth={auth} dataPath={f.path}/>
+                    {:else if f.type == "phonenum"}
+                        <PhoneInp auth={auth} dataPath={f.path}/>
                     {:else}
                         <div>Unknown Input type ({f.type})</div>
                     {/if}
