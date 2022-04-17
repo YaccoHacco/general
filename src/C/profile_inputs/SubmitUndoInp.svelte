@@ -2,6 +2,7 @@
     export let onSubmit;
     export let onUndo;
     export let isChanged = false;
+    export let isInvalid = false;
     export let isError = false;
 </script>
 
@@ -20,9 +21,16 @@
         </div>
     </button>
     {/if}
-    {#if isError}
-        <div class="flex flex-row justify-center items-center p-1 rounded-lg bg-orange-500 hover:bg-orange-600" title="An error occured">
+    {#if isInvalid}
+        <div class="flex flex-row justify-center items-center p-1 rounded-lg bg-orange-500 hover:bg-orange-600" title="Invalid input">
             <svg class="h-5" viewBox="0 0 24 24"><path fill="#000000" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+            <div>Invalid</div>
+        </div>
+    {/if}
+    {#if isError}
+        <div class="flex flex-row justify-center items-center p-1 rounded-lg bg-red-600 hover:bg-red-700" title="An error occured">
+            <svg class="h-5" viewBox="0 0 24 24"><path fill="#000000" d="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"></path></svg>
+            <div>Error</div>
         </div>
     {/if}
 </div>
