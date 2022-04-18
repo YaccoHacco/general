@@ -1,5 +1,4 @@
 <!-- Anything in here is transfered to all pages -->
-<div class="bg-blue-400">This div here is located in __layout.svelte<br>Anything you put in __layout.svelte will be added to all pages<br>Really useful for a persistant navigation bar or soemthing</div>
 
 <!-- <slot> is essentail where the page being visited is fitted in so don't delete it -->
 <slot></slot>

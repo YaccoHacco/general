@@ -11,8 +11,11 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
-    "svelte": "^3.44.0",
+    "svelte": "^3.46.6",
     "svelte-windicss-preprocess": "^4.2.6"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "svelte-kit": "^1.0.0"
+  }
 }
