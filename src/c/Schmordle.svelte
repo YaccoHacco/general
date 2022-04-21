@@ -1,10 +1,10 @@
-<!--
 <script>
-    import Line from "../c/Line.svelte"
+    import Line from "./Line.svelte"
     import wordsJSON from "../words.json"
+    
     const words = wordsJSON.words;
 
-    let word = words[Math.round(Math.random()*words.length)]
+    export let word = words[Math.round(Math.random()*words.length)]
     console.log(word)
     $: previous = []
     $: lineStatus = []
@@ -27,7 +27,7 @@
         }
         if((event.key == "Enter")&&(keyPosition == 5)){
             let inputString = input.join("")
-            if(words.indexOf(inputString)!=-1){
+            if((words.indexOf(inputString)!=-1)||(inputString==word)){
                 //Add code to flip letters and check letter positions
                 answerArray = word.split('')
                 var newLineStatus = [0,0,0,0,0]
@@ -64,7 +64,7 @@
                 badInput()
             }
 
-            if(guessNumber == 6){
+            if((guessNumber == 6)&&(!epicWin)){
                 epicFail = true
             }
         }
@@ -79,6 +79,8 @@
         await delay(2000);
         showBad = false;
     }
+
+    
     
 </script>
 <svelte:window on:keydown = {keyPress}></svelte:window>
@@ -104,8 +106,8 @@
     </div>
 </div>
 <div class="flex flex-row justify-center h-screen w-screen bg-dark-400">
-    <div class="flex flex-col justify-start mt-10">
-        <div class ="grid-rows-5">
+    <div class="flex flex-col justify-start items-center mt-10">
+        <div class="">
             {#each guessMax as d,i}
                 {#if i == guessNumber}
                     <Line rowData={input} keyPosition = {keyPosition}></Line>
@@ -116,13 +118,8 @@
                 {/if}
             {/each}
         </div> 
+        <a href="/home" class="transition-all duration-0 border-dark-100 border-1 text-white bg-dark-400 hover:bg-yellow-400 focus:bg-lime-900 rounded-lg w-max px-2 py-1 mt-3">
+            Make a custom schmordle link
+        </a>
     </div>
-    
 </div>
--->
-<script>
-    import Schmordle from "../c/schmordle.svelte";
-</script>
-
-<Schmordle></Schmordle>
-
