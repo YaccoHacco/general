@@ -1,13 +1,12 @@
 <script>
     import { onMount } from "svelte";
     import SubmitUndoInp from "./SubmitUndoInp.svelte";
-    import { getAccountData, editAccountData, getDoc, doc, DB } from "../../F/fb";
+    import { getAccountData, editAccountData } from "../../F/fb";
     export let auth;
     export let dataPath;
 
     let inp;
 
-    
     let hasChanged = false;
     let hasError = false;
     let hasInvalid = false;

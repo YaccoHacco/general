@@ -4,12 +4,12 @@
     import { getAccountData, editAccountData } from "../../F/fb";
     export let auth;
     export let dataPath;
-    export let maxLen = 32;
 
     let inp;
 
-    let hasError = false;
     let hasChanged = false;
+    let hasError = false;
+
     function inpChange(){
         hasChanged = true;
     }
@@ -24,6 +24,8 @@
                 hasError=true;
             }
         })
+        
+
     }
 
     async function loadData(){
@@ -41,18 +43,15 @@
     onMount(loadData)
 </script>
 
-{#if maxLen <= 32}
-    <div class="flex flex-row gap-3">
-        <input class="p-1 rounded-lg bg-true-gray-700 hover:bg-true-gray-600 focus:bg-true-gray-500" maxlength={maxLen} on:input={inpChange} bind:this={inp}>
-        <SubmitUndoInp onSubmit={changeData} onUndo={loadData} isChanged={hasChanged} isError={hasError}/>
-    </div>
-{:else}
-    <div class="flex flex-col gap-2">
-        {#if maxLen <= 128}
-            <input class="p-1 rounded-lg bg-true-gray-700 hover:bg-true-gray-600 focus:bg-true-gray-500" maxlength={maxLen} on:input={inpChange} bind:this={inp}>
-        {:else}
-            <textarea class="p-1 rounded-lg h-min bg-true-gray-700 hover:bg-true-gray-600 focus:bg-true-gray-500" maxlength={maxLen} on:input={inpChange} bind:this={inp}></textarea>
-        {/if}
-        <SubmitUndoInp onSubmit={changeData} onUndo={loadData} isChanged={hasChanged} isError={hasError}/>
-    </div>
-{/if}
+
+
+
+<div class="flex flex-row gap-3">
+    <input class="p-1 rounded-lg bg-true-gray-700 hover:bg-true-gray-600 focus:bg-true-gray-500" type="text" on:input={inpChange} bind:this={inp}>
+    <SubmitUndoInp onSubmit={changeData} onUndo={loadData} isChanged={hasChanged} isInvalid={false} isError={hasError}/>
+</div>
+
+
+
+
+

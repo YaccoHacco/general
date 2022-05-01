@@ -1,7 +1,9 @@
 <script>
     import StringInp from "./profile_inputs/StringInp.svelte";
     import EmailInp from "./profile_inputs/EmailInp.svelte";
-    import PhoneInp from "./profile_inputs/PhoneInp.svelte"
+    import PhoneInp from "./profile_inputs/PhoneInp.svelte";
+    import CountryInp from "./profile_inputs/CountryInp.svelte";
+    import AddressInp from "./profile_inputs/AddressInp.svelte";
 
     export let auth;
     export let urprofile = {};
@@ -56,6 +58,10 @@
                         <EmailInp auth={auth} dataPath={f.path}/>
                     {:else if f.type == "phonenum"}
                         <PhoneInp auth={auth} dataPath={f.path}/>
+                    {:else if f.type == "country"}
+                        <CountryInp auth={auth} dataPath={f.path}/>
+                    {:else if f.type == "address"}
+                        <AddressInp auth={auth} dataPath={f.path}/>
                     {:else}
                         <div>Unknown Input type ({f.type})</div>
                     {/if}
