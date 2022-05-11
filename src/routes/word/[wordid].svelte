@@ -38,5 +38,7 @@ import { onMount } from "svelte"
         word = decrypt(urlStr)
     })
 </script>
+<div class="w-full">
+    <Schmordle word={word}></Schmordle>
+</div>
 
-<Schmordle word={word}></Schmordle>

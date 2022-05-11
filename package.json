@@ -16,6 +16,7 @@
   },
   "type": "module",
   "dependencies": {
-    "svelte-kit": "^1.0.0"
+    "svelte-kit": "^1.0.0",
+    "windicss": "^3.5.1"
   }
 }
